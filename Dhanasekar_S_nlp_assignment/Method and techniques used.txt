@@ -1,0 +1,67 @@
+Data Loading and Preprocessing:
+Data Loading:
+Audio files and transcriptions were loaded using librosa and standard Python file-handling methods.
+Verification was performed to ensure the number of transcriptions matches the number of audio files.
+Preprocessing:
+Audio data was preprocessed using Mel-frequency spectrogram features via librosa.feature.melspectrogram.
+Spectrogram power was converted to dB scale for better feature representation.
+Spectrogram shapes were standardized by padding or truncating to a consistent size.
+Model Development:
+Neural Network Architecture:
+Implemented a Convolutional Neural Network (CNN) using tensorflow.keras.Sequential.
+The model comprised Conv2D layers with ReLU activation, MaxPooling2D layers, and Dense layers for classification.
+The output layer used a softmax activation for multi-class classification.
+Model Compilation and Training:
+Compiled the model using the Adam optimizer and sparse categorical cross-entropy loss.
+Trained the model on preprocessed audio data and their corresponding encoded transcriptions.
+Validation data was used to monitor model performance and prevent overfitting during training.
+Transcription Function:
+Prediction Mechanism:
+Implemented a transcription function that:
+Loads an audio file and preprocesses it.
+Makes a prediction using the trained model.
+Decodes the predicted label back to a transcription using LabelEncoder.
+Audio Prediction and Evaluation:
+Utilized the trained model to transcribe a sample audio file and demonstrated the functionality of the transcription function.
+Future Improvements:
+Data Augmentation:
+Augmenting the training data could enhance the model's robustness, especially in handling varying speech characteristics.
+Model Complexity:
+Experimentation with more complex architectures or fine-tuning hyperparameters might further improve performance.
+Replication Guide:
+Data Requirements:
+Store audio files and transcriptions in a designated folder structure.
+Execution Steps:
+Load and preprocess data.
+Build, compile, and train the model.
+Implement the transcription function using the trained model.
+Utilize the function for transcription tasks.
+Conclusion:
+The implemented solution involves a CNN-based transcription model trained on preprocessed audio data. It demonstrates successful audio transcription using the trained model. The model's performance can be further enhanced through data augmentation, model architecture variations, or hyperparameter tuning.
+
+Chosen Model
+The model architecture utilized for this transcription task is a Convolutional Neural Network (CNN). The CNN is composed of convolutional layers followed by max-pooling layers to extract hierarchical features from the input spectrograms. The network consists of convolutional layers to capture spatial patterns in the spectrograms and dense layers for classification based on the learned features. The final layer uses softmax activation for multi-class classification, where the number of units matches the number of unique transcription classes.
+
+Preprocessing Techniques
+The input audio data is preprocessed into Mel Spectrograms using librosa, converting audio signals into a visual representation. These spectrograms are then converted to decibel units for scaling. Furthermore, to maintain uniformity in input size, the spectrograms are resized to a shape of (128, 128).
+
+Training Methodology
+The model is trained using the Adam optimizer with a sparse categorical cross-entropy loss function. The dataset is split into training and validation sets using an 80:20 ratio. The model is trained for 10 epochs with a batch size of 32. The training process involves forward and backward propagation to optimize the network weights based on the defined loss function.
+
+Hyperparameter Tuning
+The chosen hyperparameters include:
+
+Learning Rate: The default learning rate of the Adam optimizer is used.
+Number of Epochs: The model is trained for 10 epochs to strike a balance between computation time and convergence.
+Batch Size: A batch size of 32 is chosen to balance memory consumption and training speed.
+Instructions for Replication
+Download the provided dataset and ensure the required libraries are installed (librosa, tensorflow, numpy, etc.).
+Modify the file_path variable in the code to point to the directory containing the dataset.
+Execute the Python script to train the model and load the data.
+Run the script and allow the model to train for the specified number of epochs.
+Model Saving
+The trained model can be saved using TensorFlow's model.save() method. After training, the model can be saved to disk in the HDF5 format to share along with the script.
+
+Metrics and Evaluation
+For evaluating the model's performance, metrics such as accuracy, precision, recall, and F1-score can be computed using the test dataset. These metrics provide insights into the model's ability to correctly transcribe Marathi speech. Use model.evaluate() on the test data to compute and report these metrics.
+
